@@ -1,4 +1,4 @@
-package pl.edu.agh.languagelearningserver.controller.dao.enities.ids;
+package pl.edu.agh.languagelearningserver.db.enities.ids;
 
 
 

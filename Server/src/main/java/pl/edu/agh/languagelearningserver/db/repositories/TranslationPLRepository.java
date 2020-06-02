@@ -1,8 +1,8 @@
-package pl.edu.agh.languagelearningserver.controller.dao.repositories;
+package pl.edu.agh.languagelearningserver.db.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pl.edu.agh.languagelearningserver.controller.dao.enities.TranslationPL;
+import pl.edu.agh.languagelearningserver.db.enities.TranslationPL;
 
 @Repository
 public interface TranslationPLRepository extends JpaRepository<TranslationPL, Long> {

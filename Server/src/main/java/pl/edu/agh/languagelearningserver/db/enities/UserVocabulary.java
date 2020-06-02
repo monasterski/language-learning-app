@@ -1,9 +1,9 @@
-package pl.edu.agh.languagelearningserver.controller.dao.enities;
+package pl.edu.agh.languagelearningserver.db.enities;
 
 
 import lombok.Getter;
 import lombok.Setter;
-import pl.edu.agh.languagelearningserver.controller.dao.enities.ids.UserVocabularyId;
+import pl.edu.agh.languagelearningserver.db.enities.ids.UserVocabularyId;
 
 import javax.persistence.*;
 
