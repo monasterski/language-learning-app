@@ -20,7 +20,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegisterController {
+public class RegisterController extends AbstractController {
 
     AppController appController;
 
@@ -49,29 +49,18 @@ public class RegisterController {
 
         String URL = AppProperties.SERVER_URL;
         URL = URL + "user/register";
-        RestTemplate restTemplate = new RestTemplate();
-        List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
-        messageConverters.add(new MappingJackson2HttpMessageConverter());
-        messageConverters.add(new StringHttpMessageConverter());
-        restTemplate.setMessageConverters(messageConverters);
         RequestEntity<User> request = RequestEntity
                 .post(new URI(URL))
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(user);
         try {
-            ResponseEntity<String> response = restTemplate.exchange(request, String.class);
+            ResponseEntity<String> response = sendRequest(request);
         }
-        catch (HttpClientErrorException errorException){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Error");
-            alert.setContentText("User already exists");
-            alert.showAndWait();
+        catch (HttpClientErrorException errorException) {
+            showErrorMessage("User already exists");
             return;
         }
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Info");
-        alert.setContentText("User registered");
-        alert.showAndWait();
+        showInfoMessage("User registered");
     }
 
     @FXML

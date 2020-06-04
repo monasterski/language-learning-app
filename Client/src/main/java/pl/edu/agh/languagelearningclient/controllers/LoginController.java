@@ -1,26 +1,19 @@
 package pl.edu.agh.languagelearningclient.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestTemplate;
 import pl.edu.agh.languagelearningclient.AppProperties;
 import pl.edu.agh.languagelearningclient.model.User;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
 
-public class LoginController {
+public class LoginController extends AbstractController {
 
 
     AppController appController;
@@ -50,30 +43,19 @@ public class LoginController {
 
         String URL = AppProperties.SERVER_URL;
         URL = URL + "user/login";
-        RestTemplate restTemplate = new RestTemplate();
-        List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
-        messageConverters.add(new MappingJackson2HttpMessageConverter());
-        messageConverters.add(new StringHttpMessageConverter());
-        restTemplate.setMessageConverters(messageConverters);
         RequestEntity<User> request = RequestEntity
                 .post(new URI(URL))
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(user);
         ResponseEntity<String> response;
         try {
-            response = restTemplate.exchange(request, String.class);
+            response = sendRequest(request);
         }
         catch (HttpClientErrorException errorException){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Error");
-            alert.setContentText("Bad credentials");
-            alert.showAndWait();
+            showErrorMessage("Bad credentials");
             return;
         }
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Info");
-        alert.setContentText("User logged: app context: " + response.getBody());
-        alert.showAndWait();
+        showInfoMessage("User logged: app context: " + response.getBody());
     }
 
     @FXML
