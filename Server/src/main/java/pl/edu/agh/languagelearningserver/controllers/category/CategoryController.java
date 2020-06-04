@@ -16,6 +16,7 @@ import pl.edu.agh.languagelearningserver.db.enities.VocabularyGroup;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("category")
@@ -46,11 +47,11 @@ public class CategoryController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<VocabularyGroup>> getCategories(){
+    public ResponseEntity<List<String>> getCategories(){
         User user = applicationContext.getUser();
 
         return new ResponseEntity<>(
-                vocabularyGroupService.getAllVocabularyGroups(user),
+                vocabularyGroupService.getAllVocabularyGroups(user).stream().map(VocabularyGroup::getName).collect(Collectors.toList()),
                 HttpStatus.OK);
     }
 
@@ -71,7 +72,7 @@ public class CategoryController {
         userVocabularyService.updateCategoryToAllWords(vg, wordsToAdd.get(categoryName), user);
 
         return new ResponseEntity<>(
-                "Successfull added Category.",
+                "Successfull added words to category.",
                 HttpStatus.OK);
     }
 }

@@ -83,7 +83,7 @@ public class WordController {
 
     @Transactional
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Map<EnglishWord, List<String>>> getWordsByCategory(@RequestParam(defaultValue = "all") String category){
+    public ResponseEntity<Map<String, List<String>>> getWordsByCategory(@RequestParam(defaultValue = "all") String category){
         User user = applicationContext.getUser();
         ArrayList<EnglishWord> words;
         if(category.equals("all")){
@@ -109,9 +109,9 @@ public class WordController {
 
     private ArrayList<String> translateWordUsingApi(String word) {
         ArrayList<String> translations =  new ArrayList<>();
-        translations.add(word + "1");
-        translations.add(word + "2");
-        translations.add(word + "3");
+        translations.add("t1: "+ word);
+        translations.add("t2: " + word);
+        translations.add("t3: " + word);
         return translations;
     }
 

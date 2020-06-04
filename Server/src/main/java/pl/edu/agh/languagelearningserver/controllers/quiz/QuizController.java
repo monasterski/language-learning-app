@@ -14,6 +14,7 @@ import pl.edu.agh.languagelearningserver.db.enities.EnglishWord;
 import pl.edu.agh.languagelearningserver.db.enities.User;
 import pl.edu.agh.languagelearningserver.db.enities.UserVocabulary;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -30,11 +31,12 @@ public class QuizController {
     @Autowired
     ApplicationContext applicationContext;
 
+    @Transactional
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<String> addQuizResult(@RequestBody Map<EnglishWord,String> result){
+    public ResponseEntity<String> addQuizResult(@RequestBody Map<String,String> result){
         User user = applicationContext.getUser();
         int allAnswers = result.size();
-        Map<EnglishWord,String> filteredResult = translationPLService.checkQuizResult(result);
+        Map<EnglishWord,String> filteredResult = translationPLService.checkQuizResult(result, user);
         int goodAnswers = filteredResult.size();
 
         ArrayList<UserVocabulary> userVocabularies =
