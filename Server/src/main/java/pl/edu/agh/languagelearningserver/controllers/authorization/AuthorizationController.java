@@ -56,7 +56,7 @@ public class AuthorizationController extends AbstractController {
             getApplicationContext().initContext(userRepository.findByUsername(login));//tu by nie wystarczylo userInRepo?
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.TEXT_PLAIN);
-            return ResponseEntity.accepted().headers(headers).body("username: " +  getApplicationContext().getUser().getUsername());
+            return ResponseEntity.accepted().headers(headers).body(getApplicationContext().getUser().getUsername());
         }
         return new ResponseEntity<>(
                 "false",

@@ -8,11 +8,12 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AbstractController {
+public class PageController {
+
+    AppController appController;
 
     public ResponseEntity<String> sendRequest(RequestEntity<?> requestEntity) {
 
@@ -36,5 +37,9 @@ public class AbstractController {
         alert.setTitle("Info");
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    public void initialize(AppController appController) {
+        this.appController = appController;
     }
 }

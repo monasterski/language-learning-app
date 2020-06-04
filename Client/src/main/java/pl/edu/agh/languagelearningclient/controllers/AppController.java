@@ -9,59 +9,67 @@ import java.io.IOException;
 
 public class AppController {
 
-    private Stage primaryStage;
+    private final Stage primaryStage;
 
-    private Scene mainPage;
-    private Scene loginPage;
-    private Scene registerPage;
+    public Scene mainPage;
+
+    public Scene loginPage;
+
+
+
+    public Scene registerPage;
+    public Scene userCockpitPage;
+
+
+    private String username;
+    public String getUsername() { return username;}
+    public void setUsername(String username) {this.username = username; }
 
     public AppController(Stage stage){
         this.primaryStage = stage;
     }
 
-    public void goBackToFirstWindow() {
-        primaryStage.setScene(mainPage);
+    public void initMainPageScene() throws IOException {
+        AnchorPane layout = initScene("Main page","/views/MainPage.fxml",new MainPageController());
+        this.mainPage = new Scene(layout);
+        primaryStage.setScene(this.mainPage);
         primaryStage.show();
     }
 
-    public void initialize() throws IOException {
-
-        primaryStage.setTitle("Main page");
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(AppController.class.getResource("/views/MainPage.fxml"));
-        AnchorPane layout = loader.load();
-
-        MainPageController controller = loader.getController();
-        controller.initialize(this);
-        mainPage = new Scene(layout);
-        primaryStage.setScene(mainPage);
+    public void initLoginPageScene() throws IOException {
+        AnchorPane layout = initScene("Login","/views/LoginPage.fxml",new LoginPageController());
+        this.loginPage = new Scene(layout);
+        primaryStage.setScene(this.loginPage);
         primaryStage.show();
     }
 
-    public void initLoginScene() throws IOException {
-
-        primaryStage.setTitle("Login");
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(AppController.class.getResource("/views/LoginPage.fxml"));
-        AnchorPane layout = loader.load();
-
-        LoginController controller = loader.getController();
-        controller.initialize(this);
-        loginPage = new Scene(layout);
-        primaryStage.setScene(loginPage);
+    public void initRegisterPageScene() throws IOException {
+        AnchorPane layout = initScene("Login","/views/RegisterPage.fxml",new RegisterPageController());
+        this.registerPage = new Scene(layout);
+        primaryStage.setScene(this.registerPage);
         primaryStage.show();
     }
 
-    public void initRegisterScene() throws IOException {
-        primaryStage.setTitle("Register");
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(AppController.class.getResource("/views/RegisterPage.fxml"));
-        AnchorPane layout = loader.load();
-
-        RegisterController controller = loader.getController();
-        controller.initialize(this);
-        registerPage = new Scene(layout);
-        primaryStage.setScene(registerPage);
+    public void initUserCockpitScene() throws IOException {
+        AnchorPane layout = initScene("Cockpit","/views/UserCockpit.fxml",new UserCockpitController());
+        this.userCockpitPage = new Scene(layout);
+        primaryStage.setScene(this.userCockpitPage);
         primaryStage.show();
+    }
+
+    public void switchScene(Scene scene) {
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public AnchorPane initScene(String sceneTitle, String viewResourcePath, PageController controller) throws IOException {
+
+        primaryStage.setTitle(sceneTitle);
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(AppController.class.getResource(viewResourcePath));
+        AnchorPane layout = loader.load();
+        controller = loader.getController();
+        controller.initialize(this);
+        return layout;
     }
 }

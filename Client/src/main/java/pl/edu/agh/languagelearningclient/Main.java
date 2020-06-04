@@ -8,15 +8,10 @@ import java.io.IOException;
 
 public class Main extends Application {
 
-    private Stage primaryStage;
-
-    private AppController appController;
-
     @Override
     public void start(Stage primaryStage) throws IOException {
-        this.primaryStage = primaryStage;
-        this.appController = new AppController(primaryStage);
-        this.appController.initialize();
+        AppController appController = new AppController(primaryStage);
+        appController.initMainPageScene();
     }
 
     public static void main(String[] args) {

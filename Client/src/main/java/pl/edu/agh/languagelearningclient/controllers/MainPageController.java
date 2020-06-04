@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 
 import java.io.IOException;
 
-public class MainPageController {
+public class MainPageController extends PageController {
     private AppController appController;
 
     @FXML
@@ -20,11 +20,11 @@ public class MainPageController {
 
     @FXML
     public void handleLoginPageAction() throws IOException {
-        appController.initLoginScene();
+        appController.initLoginPageScene();
     }
 
     @FXML
     public void handleRegisterPageAction() throws IOException {
-        appController.initRegisterScene();
+        appController.initRegisterPageScene();
     }
 }
