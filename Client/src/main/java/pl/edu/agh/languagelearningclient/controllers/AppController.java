@@ -9,6 +9,16 @@ import java.io.IOException;
 
 public class AppController {
 
+    private String sessionID;
+
+    public String getSessionID() {
+        return sessionID;
+    }
+
+    public void setSessionID(String sessionID) {
+        this.sessionID = sessionID;
+    }
+
     private final Stage primaryStage;
 
     public Scene mainPage;
