@@ -30,4 +30,14 @@ public class UserVocabulary {
     private VocabularyGroup vocabularyGroup;
 
     private int repetition;
+
+    public UserVocabulary() {
+    }
+
+    public UserVocabulary(User user, EnglishWord englishWord) {
+        this.userVocabularyId= new UserVocabularyId(user,englishWord);
+        this.user=user;
+        this.englishWord=englishWord;
+        this.repetition=0;
+    }
 }

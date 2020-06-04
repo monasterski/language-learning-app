@@ -53,7 +53,7 @@ public class AuthorizationController extends AbstractController {
         String password = userCredentials.getString("password");
         User userInRepo = authorizationService.getUser(login);
         if(userInRepo!=null && password.equals(userInRepo.getPassword())) {
-            getApplicationContext().initContext(userRepository.findByUsername(login));
+            getApplicationContext().initContext(userRepository.findByUsername(login));//tu by nie wystarczylo userInRepo?
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.TEXT_PLAIN);
             return ResponseEntity.accepted().headers(headers).body("username: " +  getApplicationContext().getUser().getUsername());

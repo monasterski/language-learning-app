@@ -6,4 +6,7 @@ import pl.edu.agh.languagelearningserver.db.enities.EnglishWord;
 
 @Repository
 public interface EnglishWordRepository extends JpaRepository<EnglishWord, Long> {
+    EnglishWord findEnglishWordByWord(String word);
+    boolean existsByWord(String word);
+
 }

@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -17,4 +18,18 @@ public class EnglishWord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long wordId;
     private String word;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EnglishWord that = (EnglishWord) o;
+        return Objects.equals(wordId, that.wordId) &&
+                Objects.equals(word, that.word);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(wordId, word);
+    }
 }

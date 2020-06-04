@@ -4,6 +4,8 @@ package pl.edu.agh.languagelearningserver.db.enities.ids;
 
 import lombok.Getter;
 import lombok.Setter;
+import pl.edu.agh.languagelearningserver.db.enities.EnglishWord;
+import pl.edu.agh.languagelearningserver.db.enities.User;
 
 
 import javax.persistence.Embeddable;
@@ -17,6 +19,14 @@ public class UserVocabularyId implements Serializable {
 
     private Long userId;
     private Long wordId;
+
+    public UserVocabularyId(User user, EnglishWord englishWord) {
+        this.userId = user.getUserId();
+        this.wordId = englishWord.getWordId();
+    }
+
+    public UserVocabularyId() {
+    }
 
     @Override
     public int hashCode() {

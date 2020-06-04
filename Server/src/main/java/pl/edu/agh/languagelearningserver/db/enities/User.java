@@ -23,4 +23,5 @@ public class User {
         this.username = login;
         this.password = password;
     }
+
 }
