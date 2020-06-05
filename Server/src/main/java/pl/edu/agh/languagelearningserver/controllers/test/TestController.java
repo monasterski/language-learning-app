@@ -42,8 +42,16 @@ public class TestController {
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<String> createTestData(){
 
+
+
         User user1 = new User("login1", "password1");
         User user2 = new User("login2", "password2");
+
+        if(authorizationService.isUserRegistered("login1")){
+            return new ResponseEntity<>(
+                    "You create test data earlier",
+                    HttpStatus.BAD_REQUEST);
+        }
 
         authorizationService.registerUser(user1);
         authorizationService.registerUser(user2);
