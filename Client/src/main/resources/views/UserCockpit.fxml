@@ -11,5 +11,6 @@
       <Button fx:id="addWordButton" layoutX="206.0" layoutY="119.0" mnemonicParsing="false" onAction="#handleAddWordAction" prefHeight="45.0" prefWidth="150.0" text="Dodaj słowo" />
       <Button fx:id="quizButton" layoutX="206.0" layoutY="177.0" mnemonicParsing="false" onAction="#handleStartQuizAction" prefHeight="45.0" prefWidth="150.0" text="Quiz" />
       <Button fx:id="addCategoryButton" layoutX="206.0" layoutY="235.0" mnemonicParsing="false" onAction="#handleAddCategoryAction" prefHeight="45.0" prefWidth="150.0" text="Dodaj kategorie" />
+      <Button fx:id="revisionButton" layoutX="206.0" layoutY="293.0" mnemonicParsing="false" onAction="#handleRevisionAction" prefHeight="45.0" prefWidth="150.0" text="Zacznij powtorke" />
    </children>
 </AnchorPane>

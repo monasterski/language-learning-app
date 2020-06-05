@@ -51,6 +51,7 @@ public class AppController extends PageController{
     public Scene registerPage;
     public Scene userCockpitPage;
     public Scene quizPage;
+    public Scene revisionPage;
 
 
     private String username;
@@ -93,6 +94,13 @@ public class AppController extends PageController{
         AnchorPane layout = initScene("Quiz","/views/QuizPage.fxml",new QuizController());
         this.quizPage = new Scene(layout);
         primaryStage.setScene(this.quizPage);
+        primaryStage.show();
+    }
+
+    public void initRevisionScene() throws IOException {
+        AnchorPane layout = initScene("Revision","/views/RevisionPage.fxml",new RevisionPageController());
+        this.revisionPage = new Scene(layout);
+        primaryStage.setScene(this.revisionPage);
         primaryStage.show();
     }
 

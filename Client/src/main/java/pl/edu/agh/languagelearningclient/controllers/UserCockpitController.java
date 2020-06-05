@@ -38,6 +38,9 @@ public class UserCockpitController extends PageController {
     @FXML
     Button addCategoryButton;
 
+    @FXML
+    Button revisionButton;
+
     public void initialize(AppController appController) {
 
         this.appController = appController;
@@ -133,6 +136,11 @@ public class UserCockpitController extends PageController {
         else {
             showInfoMessage("Nie wpisałeś żadnego słowa");
         }
+    }
+
+    @FXML
+    public void handleRevisionAction() throws IOException {
+        appController.initRevisionScene();
     }
 
 }

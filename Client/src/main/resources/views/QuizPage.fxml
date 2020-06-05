@@ -7,9 +7,9 @@
    <children>
       <ComboBox fx:id="categoryChooser" layoutX="108.0" layoutY="65.0" prefWidth="150.0" promptText="Wybierz kategorię" />
       <Button fx:id="startQuizButton" layoutX="300.0" layoutY="65.0" mnemonicParsing="false" onAction="#handleStartQuizAction" text="Rozpocznij Quiz" />
-      <Label layoutX="100.0" layoutY="127.0" prefHeight="26.0" prefWidth="56.0" text="Słowo" />
+      <Label layoutX="90.0" layoutY="127.0" prefHeight="26.0" prefWidth="66.0" text="Słowo" />
       <TextField fx:id="userTranslation" layoutX="169.0" layoutY="164.0" />
-      <Label fx:id="currentWord" layoutX="100.0" layoutY="164.0" prefHeight="26.0" prefWidth="56.0" text="&lt;słowo&gt;" />
+      <Label fx:id="currentWord" layoutX="90.0" layoutY="164.0" prefHeight="26.0" prefWidth="66.0" text="&lt;słowo&gt;" />
       <Label layoutX="169.0" layoutY="127.0" prefHeight="26.0" prefWidth="123.0" text="Podaj znaczenie:" />
       <Button fx:id="submitButton" onAction="#handleSubmitWordAction" layoutX="340.0" layoutY="164.0" mnemonicParsing="false" text="Zatwierdź" />
       <Button fx:id="goBackButton" onAction="#handleGoBackAction" layoutX="523.0" layoutY="322.0" mnemonicParsing="false" text="Powrót" />
