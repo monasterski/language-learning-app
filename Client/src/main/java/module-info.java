@@ -10,6 +10,7 @@ module language.learning.client {
     requires com.fasterxml.jackson.core;
     requires com.fasterxml.jackson.databind;
     requires com.fasterxml.jackson.annotation;
+    requires spring.core;
     //requires javafx.maven.plugin;
 
     opens pl.edu.agh.languagelearningclient;

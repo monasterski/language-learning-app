@@ -7,6 +7,7 @@ import org.springframework.data.util.Pair;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.edu.agh.languagelearningserver.beans.EnglishWordService;
 import pl.edu.agh.languagelearningserver.beans.UserVocabularyService;
 import pl.edu.agh.languagelearningserver.beans.VocabularyGroupService;
 import pl.edu.agh.languagelearningserver.controllers.authorization.ApplicationContext;
@@ -14,6 +15,8 @@ import pl.edu.agh.languagelearningserver.db.enities.EnglishWord;
 import pl.edu.agh.languagelearningserver.db.enities.User;
 import pl.edu.agh.languagelearningserver.db.enities.VocabularyGroup;
 
+import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -21,6 +24,9 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("category")
 public class CategoryController {
+
+    @Autowired
+    EnglishWordService englishWordService;
 
     @Autowired
     ApplicationContext applicationContext;
@@ -56,7 +62,8 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "/word", method = RequestMethod.POST)
-    public ResponseEntity<String> addWordsToCategory(@RequestBody Map<String, List<EnglishWord>> wordsToAdd){
+    @Transactional
+    public ResponseEntity<String> addWordsToCategory(@RequestBody Map<String, List<String>> wordsToAdd){
         if(wordsToAdd.size() != 1){
             return new ResponseEntity<>(
                     "Too many keys on map",
@@ -68,8 +75,10 @@ public class CategoryController {
         for (String k: wordsToAdd.keySet()) {
             categoryName = k;
         }
+        ArrayList<EnglishWord> englishWords = wordsToAdd.get(categoryName).stream().filter(x ->englishWordService.isCreated(x))
+                .map(x-> englishWordService.getByWord(x)).collect(Collectors.toCollection(ArrayList::new));
         VocabularyGroup vg = vocabularyGroupService.getCategoryByName(categoryName, user);
-        userVocabularyService.updateCategoryToAllWords(vg, wordsToAdd.get(categoryName), user);
+        userVocabularyService.updateCategoryToAllWords(vg, englishWords, user);
 
         return new ResponseEntity<>(
                 "Successfull added words to category.",
