@@ -8,6 +8,7 @@
       <Label layoutX="226.0" layoutY="52.0" text="Witamy użytkowniku" />
       <Label fx:id="userName" layoutX="267.0" layoutY="77.0" text="Label" />
       <Button fx:id="goBackButton" layoutX="482.0" layoutY="313.0" mnemonicParsing="false" onAction="#handleGoBackAction" text="Back" />
-      <Button fx:id="addWordButton" onAction="#handleAddWordAction" layoutX="233.0" layoutY="112.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="93.0" text="Dodaj słowo" />
+      <Button fx:id="addWordButton" layoutX="233.0" layoutY="112.0" mnemonicParsing="false" onAction="#handleAddWordAction" prefHeight="45.0" prefWidth="93.0" text="Dodaj słowo" />
+      <Button fx:id="quizButton" onAction="#handleStartQuizAction" layoutX="233.0" layoutY="177.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="93.0" text="Quiz" />
    </children>
 </AnchorPane>

@@ -29,6 +29,7 @@ public class AppController {
 
     public Scene registerPage;
     public Scene userCockpitPage;
+    public Scene quizPage;
 
 
     private String username;
@@ -64,6 +65,13 @@ public class AppController {
         AnchorPane layout = initScene("Cockpit","/views/UserCockpit.fxml",new UserCockpitController());
         this.userCockpitPage = new Scene(layout);
         primaryStage.setScene(this.userCockpitPage);
+        primaryStage.show();
+    }
+
+    public void initQuizScene() throws IOException {
+        AnchorPane layout = initScene("Quiz","/views/QuizPage.fxml",new QuizController());
+        this.quizPage = new Scene(layout);
+        primaryStage.setScene(this.quizPage);
         primaryStage.show();
     }
 
