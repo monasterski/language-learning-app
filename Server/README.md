@@ -1,10 +1,25 @@
 # language-learning-app
 
-run database:
+to run database and server on docker:
+(From this folder)
 
-docker run --name postgres -e POSTGRES_PASSWORD=password -d -p 5432:5432 postgres
+**generate jar:**
+
+mvn clean
+
+mvn package -DskipTests
+
+**deploy using docker:**
+
+docker-compose -f docker-compose.yml build
+
+docker-compose up
 
 
-to generate some test values on databases:
+**server on endpoint:** 
 
-GET request on enpoint: localhost:8099/testS
+localhost:8099/api/
+
+**generate some test values on databases:**
+
+GET request on enpoint: localhost:8099/api/test

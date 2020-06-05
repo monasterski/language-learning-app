@@ -1,0 +1,20 @@
+version: '3'
+services:
+  api:
+    build: .
+    ports:
+      - "8099:8099"
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+
+volumes:
+  postgres-data:
