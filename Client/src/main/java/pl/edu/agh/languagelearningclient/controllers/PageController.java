@@ -6,16 +6,6 @@ public class PageController {
 
     AppController appController;
 
-//    public ResponseEntity<String> sendRequest(RequestEntity<?> requestEntity) {
-//
-//        RestTemplate restTemplate = new RestTemplate();
-//        List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
-//        messageConverters.add(new MappingJackson2HttpMessageConverter());
-//        messageConverters.add(new StringHttpMessageConverter());
-//        restTemplate.setMessageConverters(messageConverters);
-//        return restTemplate.exchange(requestEntity, String.class);
-//    }
-
     public void showErrorMessage(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText("Error");
@@ -25,7 +15,7 @@ public class PageController {
 
     public void showInfoMessage(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Info");
+        alert.setTitle("Informacja");
         alert.setContentText(message);
         alert.showAndWait();
     }

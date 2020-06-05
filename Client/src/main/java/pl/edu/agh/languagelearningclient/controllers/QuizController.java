@@ -65,6 +65,10 @@ public class QuizController extends PageController{
         ResponseEntity<Map> response = restTemplate.exchange(request, Map.class);
         Map<String, List<String>> respBody = response.getBody();
         wordsToTranslate.addAll(respBody.keySet());
+        if(wordsToTranslate.size() == 0){
+            showErrorMessage("W wybranej kategorii nie ma slow");
+            return;
+        }
         currentWord.setText(wordsToTranslate.get(currWordIndx));
     }
 
@@ -128,6 +132,10 @@ public class QuizController extends PageController{
         ObservableList<String> options =
                 FXCollections.observableArrayList(categories);
         this.categoryChooser.setItems(options);
+    }
 
+    @FXML
+    public void handleGoBackAction() {
+        appController.switchScene(appController.userCockpitPage);
     }
 }

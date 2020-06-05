@@ -52,10 +52,11 @@ public class RegisterPageController extends PageController {
             ResponseEntity<String> response = restTemplate.exchange(request, String.class);
         }
         catch (HttpClientErrorException errorException) {
-            showErrorMessage("User already exists");
+            showErrorMessage("Użytkownik o podanej nazwie już istnieje");
             return;
         }
-        showInfoMessage("User registered");
+        showInfoMessage("Użytkownik został zarejestrowany");
+        appController.switchScene(appController.mainPage);
     }
 
     @FXML

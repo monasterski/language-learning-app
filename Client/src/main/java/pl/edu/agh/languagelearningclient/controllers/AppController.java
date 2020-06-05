@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxListCell;
@@ -114,8 +115,12 @@ public class AppController extends PageController{
     public void initChoiceWordToCategoryScene(Set<String> wordsWithoutCategory, String categoryName){
         primaryStage.setTitle("Slowa do kategorii");
         VBox vBox = new VBox();
-        Button button1 = new Button("Send");
-        Button button2 = new Button("Back");
+        Button button1 = new Button("Wyślij");
+        Button button2 = new Button("Powrót");
+
+        vBox.setAlignment(Pos.CENTER);
+        button1.setAlignment(Pos.CENTER);
+        button2.setAlignment(Pos.CENTER);
 
         ArrayList<CheckBox> checkBoxes = wordsWithoutCategory.stream().map(CheckBox::new).collect(Collectors.toCollection(ArrayList::new));
         vBox.getChildren().addAll(checkBoxes);
@@ -173,7 +178,5 @@ public class AppController extends PageController{
         }else{
             showInfoMessage("Blad przy dodaniu slow");
         }
-
-
     }
 }

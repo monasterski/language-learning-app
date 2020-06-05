@@ -107,31 +107,28 @@ public class UserCockpitController extends PageController {
                     .post(new URI(URL))
                     .headers(headers)
                     .body(result.get());
-            ResponseEntity<String> response;
             RestTemplate restTemplate = new RestTemplate();
-            response = restTemplate.exchange(request, String.class);
-            showInfoMessage("Otrzymana odpowiedz: " + response.getBody());
-
-            if(response.getStatusCode() == HttpStatus.OK){
-                String URLNext = AppProperties.SERVER_URL;
-                URLNext = URLNext + "/word?category=none";
-                RequestEntity<Void> requestNext = RequestEntity
-                        .get(new URI(URLNext)).headers(headers).build();
-                ResponseEntity<Map<String, List<String>>> responseNext;
-                RestTemplate restTemplateNext = new RestTemplate();
-                ParameterizedTypeReference<Map<String, List<String>>> resultType = new ParameterizedTypeReference<>(){};
-                responseNext = restTemplateNext.exchange(requestNext, resultType);
-                if(responseNext.getBody() != null){
-                    appController.initChoiceWordToCategoryScene(responseNext.getBody().keySet(), result.get());
-                }else{
-                    showInfoMessage("Brak nowych slow do przyporzadkowania kategorii");
-                }
-
-            }else{
-                showInfoMessage("Podana kategoria istnieje");
+            try {
+                restTemplate.exchange(request, String.class);
+                showInfoMessage("Pomyślnie dodano kategorię");
             }
-
-
+            catch (HttpClientErrorException e) {
+                showErrorMessage("Podana kategoria istnieje");
+                return;
+            }
+            String URLNext = AppProperties.SERVER_URL;
+            URLNext = URLNext + "/word?category=none";
+            RequestEntity<Void> requestNext = RequestEntity
+                    .get(new URI(URLNext)).headers(headers).build();
+            ResponseEntity<Map<String, List<String>>> responseNext;
+            RestTemplate restTemplateNext = new RestTemplate();
+            ParameterizedTypeReference<Map<String, List<String>>> resultType = new ParameterizedTypeReference<>(){};
+            responseNext = restTemplateNext.exchange(requestNext, resultType);
+            if(responseNext.getBody() != null){
+                appController.initChoiceWordToCategoryScene(responseNext.getBody().keySet(), result.get());
+            }else{
+                showInfoMessage("Brak nowych slow do przyporzadkowania kategorii");
+            }
         }
         else {
             showInfoMessage("Nie wpisałeś żadnego słowa");

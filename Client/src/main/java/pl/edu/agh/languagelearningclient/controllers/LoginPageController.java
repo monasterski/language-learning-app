@@ -58,7 +58,7 @@ public class LoginPageController extends PageController {
             appController.setSessionID("JSESSIONID=" + cookie.substring(start + 1, end));
         }
         catch (HttpClientErrorException errorException){
-            showErrorMessage("Bad credentials");
+            showErrorMessage("Nieprawidłowe dane logowania");
             return;
         }
         appController.setUsername(response.getBody());
